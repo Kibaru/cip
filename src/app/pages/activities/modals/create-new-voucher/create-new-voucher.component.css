@@ -1,0 +1,5 @@
+.form-group {
+    height: calc(100% - 40px) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}

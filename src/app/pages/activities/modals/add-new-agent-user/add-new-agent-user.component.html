@@ -1,0 +1,35 @@
+<div class="form-group">
+    <div class="row">
+        <div class="col-md-6">
+            <label for="username"><strong>Name</strong></label>
+            <input class="form-control" [(ngModel)]="user.name"  type="text" required name="batch_number">
+        </div>
+        <div class="col-md-6">
+            <label for="email"><strong>Email</strong></label>
+            <input class="form-control" [(ngModel)]="user.email"  type="email" required name="batch_number">
+        </div>
+        <div *ngIf="is_travel_agent" class="col-md-6 mt-3">
+            <label for="role"><strong>Role</strong></label>
+            <select class="form-control form-select" [(ngModel)]="user.role" >
+                <option value="">Select the agent role</option>
+                <option *ngFor="let role of roles" [ngValue]="role.role"> {{role.role == 'admin_agent' ? 'Agent Administrator' : 'Agent User' }}</option>
+            </select>
+        </div>
+    </div>
+    <!-- <div class="row">
+        <div class="col-md-6">
+            <label for="username"><strong>Password</strong></label>
+            <input class="form-control" [(ngModel)]="user.password"  type="password" required name="batch_number">
+        </div>
+        <div class="col-md-6">
+            <label for="username"><strong>Verify Password</strong></label>
+            <input class="form-control" [(ngModel)]="user.verify_password"  type="password" required name="batch_number">
+        </div>
+    </div> -->
+    <!-- <div class="row">
+        <div class="col-md-12 text-center">
+            <button type="submit" class="btn btn-success mt-5" (click)="createUser()">Create User</button>
+        </div>
+    </div> -->
+        
+</div>
