@@ -190,10 +190,11 @@ export class ApiService {
 
   }
 
-  redeeemVoucher(id: any) {
+  redeeemVoucher(id: any, match: boolean = true) {
    
     const entry = {
-      id
+      id, 
+      match
     };
     return this.http.put(this.api_url + 'third-party-bookings/redeem', entry);
 

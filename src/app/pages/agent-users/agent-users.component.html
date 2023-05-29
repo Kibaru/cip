@@ -2,13 +2,13 @@
 
     <div class="card shadow">
         <div class="card-header py-3">
-            <p class="text-primary m-0 font-weight-bold">Users</p>
+            <p class="text-primary m-0 font-weight-bold">Agents</p>
         </div>
         <div class="card-body">
          
             <!-- <div class=" mt-2"> -->
                 <div class="row text-center"  style="padding: 10px;">
-                    <div class="col"><button class="btn btn-primary btn-sm" type="button" (click)="addAgentUser()">Add New User</button></div>
+                    <div class="col"><button class="btn btn-primary btn-sm" type="button" (click)="addAgentUser()">Add New Agent</button></div>
                 </div>
                 <div class="table-responsive">
                     <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table row-border">
@@ -17,7 +17,7 @@
                                 <th>ID</th>
                                 <th class="text-center">Names</th>
                                 <th class="text-center">Email</th>
-                                <th class="text-center">Admin User</th>
+                                <th class="text-center">Admin Agent</th>
                                 <th></th>
                             </tr>
                         </thead>

@@ -41,6 +41,7 @@ export class VerifyAgentVoucherComponent implements OnInit{
   wrong_fname: boolean = false;
   wrong_airline: boolean = false;
   boarding_pass_match: boolean = true;
+  match: boolean = true;
 
   
 
@@ -118,19 +119,21 @@ export class VerifyAgentVoucherComponent implements OnInit{
       this.confirmService.showConfirm("Are you sure you want to redeem this voucher despite the information mismatch? Save at your own risk!!",
       () => {
         //your logic if Yes clicked
+        // this.match = false;
         this.redeem();
       },
       () => {
         //yor logic if No clicked
       }) 
     }else{
+      // this.match = true;
       this.redeem();
     }    
   }
 
   redeem(){
     this.ngxService.start();
-    this.api.redeeemVoucher(this.voucherDetails.voucher_id)
+    this.api.redeeemVoucher(this.voucherDetails.voucher_id, this.match)
       .subscribe((save_entry_data: any) => {
 
         if (save_entry_data.hasOwnProperty("error")) {
