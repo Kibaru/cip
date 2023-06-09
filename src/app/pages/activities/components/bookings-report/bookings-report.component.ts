@@ -8,6 +8,9 @@ import { Subject } from 'rxjs';
 import { ApiService } from 'src/app/service/api/api.service';
 import { DataStoreService } from 'src/app/service/data-store/data-store.service';
 
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+
 @Component({
   selector: 'app-bookings-report',
   templateUrl: './bookings-report.component.html',
@@ -38,7 +41,7 @@ export class BookingsReportComponent implements OnInit {
   start_date : any = '';
   end_date  : any = '';
 
-  dtOptions: DataTables.Settings = {};
+  dtOptions: any
   dtTrigger: Subject<any> = new Subject<any>();
 
   @ViewChild(DataTableDirective)
@@ -76,6 +79,16 @@ export class BookingsReportComponent implements OnInit {
       order: [[0, 'desc']],
       responsive : true,
       dom: 'Bfrtip',
+      buttons: [
+        'Copy', 'excel', 'csv', 'print',
+        {
+          text: 'PDF',
+          action: () => {
+            this.openPDF()
+          }
+      },
+      ],
+      pageLength: 10,
       columns: [
         { visible: false },
         { visible: true , width : '100px'},
@@ -154,11 +167,20 @@ export class BookingsReportComponent implements OnInit {
       
 
     });
-
-
   }
 
-
+  public openPDF(): void {
+    let DATA: any = document.getElementById('htmlData');
+    html2canvas(DATA).then((canvas) => {
+      let fileWidth = 208
+      let fileHeight = (canvas.height * fileWidth) / canvas.width
+      const FILEURI = canvas.toDataURL('image/png')
+      let PDF = new jsPDF('p', 'mm', 'a4')
+      let position = 0
+      PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight)
+      PDF.save('CIP-reports.pdf')
+    });
+  }
 
   ngOnDestroy(): void {
     // Do not forget to unsubscribe the event
